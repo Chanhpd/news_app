@@ -6,6 +6,24 @@ A production-ready Flutter application that aggregates news from public REST API
 ![Dart](https://img.shields.io/badge/Dart-3.10.7-blue)
 ![Clean Architecture](https://img.shields.io/badge/Architecture-Clean-green)
 
+## ⚠️ Important: Country Selection
+
+**Not all countries have news on the free NewsAPI tier!**
+
+**Countries with BEST coverage:**
+- 🇺🇸 **United States** (default & recommended)
+- 🇬🇧 **United Kingdom**  
+- 🇮🇳 **India**
+- 🇩🇪 **Germany**
+- 🇦🇺 **Australia**
+
+**If you see "No articles available":**
+1. Open **Settings** → **Country**
+2. Select **United States** or another country from the list above
+3. App will reload with news from that country
+
+📄 [Read more about country coverage](API_COUNTRIES.md)
+
 ---
 
 ## 🚀 Features
@@ -146,6 +164,28 @@ GET https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=Y
 **Rate Limits (Free Tier):**
 - 100 requests per day
 - 1 request per second
+
+### ⚠️ FREE TIER LIMITATIONS
+
+**CRITICAL:** NewsAPI.org free tier **ONLY supports United States (US)**. All other countries return 0 articles.
+
+#### What Works:
+- ✅ **United States** - Full coverage (~28+ articles)
+- ✅ Categories (Business, Tech, Sports, etc.)
+- ✅ Keyword search
+- ✅ 100 requests/day
+
+#### What Doesn't Work (Free Tier):
+- ❌ **All other countries** (CA, GB, AU, DE, FR, IT, IN, etc.)
+- ❌ Real-time updates (15-minute delay)
+- ❌ Historical articles beyond 1 month
+
+#### Solutions:
+1. **Keep using US** (recommended for free tier)
+2. **Upgrade to Business Plan** ($449/month) for global coverage
+3. **Use alternative APIs**: GNews.io, NewsData.io, The Guardian API
+
+See [FREE_TIER_LIMITATIONS.md](FREE_TIER_LIMITATIONS.md) for complete details.
 
 ---
 

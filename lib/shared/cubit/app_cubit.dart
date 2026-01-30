@@ -6,7 +6,7 @@ import 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
   final SharedPreferences sharedPreferences;
-  
+
   static const String themeModeKey = 'theme_mode';
   static const String localeKey = 'locale';
 
@@ -19,14 +19,14 @@ class AppCubit extends Cubit<AppState> {
       final themeModeIndex = sharedPreferences.getInt(themeModeKey);
       final localeCode = sharedPreferences.getString(localeKey);
 
-      emit(state.copyWith(
-        themeMode: themeModeIndex != null 
-            ? ThemeMode.values[themeModeIndex]
-            : ThemeMode.system,
-        locale: localeCode != null 
-            ? Locale(localeCode) 
-            : const Locale('en'),
-      ));
+      emit(
+        state.copyWith(
+          themeMode: themeModeIndex != null
+              ? ThemeMode.values[themeModeIndex]
+              : ThemeMode.system,
+          locale: localeCode != null ? Locale(localeCode) : const Locale('en'),
+        ),
+      );
     } catch (e) {
       logger.e('Error loading preferences');
     }

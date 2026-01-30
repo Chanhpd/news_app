@@ -12,10 +12,7 @@ abstract class NewsRemoteDataSource {
     int page = 1,
   });
 
-  Future<List<ArticleModel>> searchNews({
-    required String query,
-    int page = 1,
-  });
+  Future<List<ArticleModel>> searchNews({required String query, int page = 1});
 }
 
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
@@ -43,6 +40,18 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
 
       if (response.statusCode == 200) {
         final newsResponse = NewsResponse.fromJson(response.data);
+        logger.d('API returned ${newsResponse.articles.length} articles');
+
+        // Log API response details for debugging
+        if (newsResponse.articles.isEmpty) {
+          logger.w(
+            '⚠️ API returned 0 articles. Response status: ${response.data['status']}, Total results: ${response.data['totalResults']}',
+          );
+          if (response.data['message'] != null) {
+            logger.w('API message: ${response.data['message']}');
+          }
+        }
+
         return newsResponse.articles;
       } else {
         throw ServerException('Failed to load news');

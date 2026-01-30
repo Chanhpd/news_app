@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import '../../features/news/presentation/pages/news_home_page.dart';
 import '../../features/news/presentation/pages/news_detail_page.dart';
 import '../../features/news/presentation/pages/search_page.dart';
 import '../../features/categories/presentation/pages/category_page.dart';
@@ -7,6 +6,7 @@ import '../../features/bookmarks/presentation/pages/bookmarks_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/news/domain/entities/article.dart';
 import '../../core/constants/news_categories.dart';
+import '../presentation/pages/main_page.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -14,7 +14,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/',
       name: 'home',
-      builder: (context, state) => const NewsHomePage(),
+      builder: (context, state) => const MainPage(),
     ),
     GoRoute(
       path: '/search',
