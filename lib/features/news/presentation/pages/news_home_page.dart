@@ -47,10 +47,8 @@ class _NewsHomeViewState extends State<NewsHomeView> {
   void _onScroll() {
     if (_isBottom) {
       context.read<NewsBloc>().add(
-            LoadMoreTopHeadlines(
-              category: _selectedCategory?.name,
-            ),
-          );
+        LoadMoreTopHeadlines(category: _selectedCategory?.name),
+      );
     }
   }
 
@@ -65,16 +63,14 @@ class _NewsHomeViewState extends State<NewsHomeView> {
     setState(() {
       _selectedCategory = category;
     });
-    context.read<NewsBloc>().add(
-          LoadTopHeadlines(category: category?.name),
-        );
+    context.read<NewsBloc>().add(LoadTopHeadlines(category: category?.name));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Smart News'),
+        title: const Text('News'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -83,10 +79,6 @@ class _NewsHomeViewState extends State<NewsHomeView> {
           IconButton(
             icon: const Icon(Icons.bookmark),
             onPressed: () => context.push('/bookmarks'),
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () => context.push('/settings'),
           ),
         ],
       ),
@@ -108,17 +100,21 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                        const Icon(
+                          Icons.error_outline,
+                          size: 64,
+                          color: Colors.red,
+                        ),
                         const SizedBox(height: 16),
                         Text(state.message),
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () {
                             context.read<NewsBloc>().add(
-                                  LoadTopHeadlines(
-                                    category: _selectedCategory?.name,
-                                  ),
-                                );
+                              LoadTopHeadlines(
+                                category: _selectedCategory?.name,
+                              ),
+                            );
                           },
                           child: const Text('Retry'),
                         ),
@@ -133,23 +129,22 @@ class _NewsHomeViewState extends State<NewsHomeView> {
                       : (state as NewsLoadingMore).currentArticles;
 
                   if (articles.isEmpty) {
-                    return const Center(
-                      child: Text('No articles found'),
-                    );
+                    return const Center(child: Text('No articles found'));
                   }
 
                   return RefreshIndicator(
                     onRefresh: () async {
                       context.read<NewsBloc>().add(
-                            LoadTopHeadlines(
-                              category: _selectedCategory?.name,
-                              refresh: true,
-                            ),
-                          );
+                        LoadTopHeadlines(
+                          category: _selectedCategory?.name,
+                          refresh: true,
+                        ),
+                      );
                     },
                     child: ListView.builder(
                       controller: _scrollController,
-                      itemCount: articles.length + (state is NewsLoadingMore ? 1 : 0),
+                      itemCount:
+                          articles.length + (state is NewsLoadingMore ? 1 : 0),
                       itemBuilder: (context, index) {
                         if (index >= articles.length) {
                           return const Center(

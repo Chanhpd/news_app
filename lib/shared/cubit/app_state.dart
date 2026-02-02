@@ -10,10 +10,7 @@ class AppState extends Equatable {
     this.locale = const Locale('en'),
   });
 
-  AppState copyWith({
-    ThemeMode? themeMode,
-    Locale? locale,
-  }) {
+  AppState copyWith({ThemeMode? themeMode, Locale? locale}) {
     return AppState(
       themeMode: themeMode ?? this.themeMode,
       locale: locale ?? this.locale,
